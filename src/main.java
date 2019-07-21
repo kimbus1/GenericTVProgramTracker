@@ -40,14 +40,21 @@ class main {
                     int epTot;
                     String airS;
                     boolean air = false;
-                    System.out.println("Enter title");
-                    title = input.nextLine();
-                    System.out.println("Enter episode currently on");
-                    epOn = input.nextInt();
-                    input.nextLine();
-                    System.out.println("Enter total episodes");
-                    epTot = input.nextInt();
-                    input.nextLine();
+                    try {
+                        System.out.println("Enter title");
+                        title = input.nextLine();
+                        System.out.println("Enter episode currently on");
+                        epOn = input.nextInt();
+                        input.nextLine();
+                        System.out.println("Enter total episodes");
+                        epTot = input.nextInt();
+                        input.nextLine();
+                    } catch (java.util.InputMismatchException e){
+                        System.out.println("invalid choice");
+                        input.nextLine();
+                        input.nextLine();
+                        continue;
+                    }
                     System.out.println("Enter t if airing");
                     airS = input.nextLine();
                     if (airS.equals("t")){
