@@ -1,11 +1,11 @@
 public class program {
-    String name;
+    String title;
     int currentEp;
     int totalEp;
     boolean airing;
 
-    public program(String name, int currentEp, int totalEp, boolean airing){
-        this.name = name;
+    public program(String title, int currentEp, int totalEp, boolean airing){
+        this.title = title;
         this.currentEp = currentEp;
         this.totalEp = totalEp;
         this.airing = airing;
@@ -17,10 +17,10 @@ public class program {
         }
     }
 
-    public void editData(String name, int currentEp, int totalEp, boolean airing, boolean airingEdited){
-        name.trim();
-        if (!name.isEmpty()){
-            this.name = name;
+    public void editData(String title, int currentEp, int totalEp, boolean airing, boolean airingEdited){
+        title.trim();
+        if (!title.isEmpty()){
+            this.title = title;
         }
         if (currentEp > 0){
             this.currentEp = currentEp;
@@ -31,5 +31,12 @@ public class program {
         if (airingEdited){
             this.airing = airing;
         }
+    }
+
+    public String toString(){
+        if (airing){
+            return title + " " + currentEp + "/" + totalEp + " Airing";
+        }
+        return title + " " + currentEp + "/" + totalEp;
     }
 }
