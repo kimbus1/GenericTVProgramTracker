@@ -3,25 +3,34 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 //Maybe can create 4 csvs instead of 2 and split type between anime and TV
+//Gonna have to use 2 programs arrays with completed in a seperate one and make changes to save based off of this
 class main {
 
     public static void main(String[] args) {
         //Setup
         ArrayList<program> programs = loadData("watching.csv");
+        ArrayList<program> programsC = loadData("complete.csv");
 
         //Main Loop
         boolean editing = true;
+        boolean complete = false;
         while (editing) {
-            programs.sort(new programComparator());
-            for (int i = 0; i < programs.size(); i++) {
-                System.out.println("[" + i + "] " + programs.get(i));
+            if(!complete) {
+                programs.sort(new programComparator());
+                for (int i = 0; i < programs.size(); i++) {
+                    System.out.println("[" + i + "] " + programs.get(i));
+                }
+            } else {
+                programsC.sort(new programComparator());
+                for (int i = 0; i < programsC.size(); i++) {
+                    System.out.println("[" + i + "] " + programsC.get(i));
+                }
             }
-
             String choice;
             int choiceI;
             Scanner input = new Scanner(System.in);
 
-            System.out.println("(i)ncrement progress, (m)ove to completed, (d)elete, (e)dit, (a)dd, (s)earch, s(w)itch to completed, sa(v)e and quit, (q)uit withouut saving ");
+            System.out.println("(i)ncrement progress, (m)ove to/from completed, (d)elete, (e)dit, (a)dd, (s)earch, s(w)itch to/from completed, sa(v)e and quit, (q)uit withouut saving ");
             choice = input.nextLine();
             choice.toLowerCase();
             switch (choice){
@@ -47,17 +56,22 @@ class main {
                     if (epOn > epTot){
                         epOn = epTot;
                     }
-                    program p = new program(title,epOn,epTot,air);
-                    programs.add(p);
+                    program p = new program(title, epOn, epTot, air);
+                    if (!complete) {
+                        programs.add(p);
+                    } else {
+                        programsC.add(p);
+                    }
                     continue;
                 case "s":
                     //search
                     continue;
                 case "w":
-                    //switch to completed
+                    complete = !complete;
                     continue;
                 case "v":
-                    save(programs);
+                    save(programs, false);
+                    save(programsC, true);
                 case "q":
                     System.exit(0);
                 case "i":
@@ -84,15 +98,12 @@ class main {
             //Increment program number
             //Move to Completed
             //Delete
-            //Add(title,episodeOn,EpisodeTotal,Airing)
             //Edit(leave blank to ignore, set blank ints to 0, set last to true if airing was edited)
             //Search
-            //Switch to Completed View
 
 
         }
         //Shutdown
-        //Save all changes to CSV files, using "" around titles
 
     }
     private static ArrayList<program> loadData (String file){
@@ -132,9 +143,13 @@ class main {
         return programs;
     }
 
-    private static void save (ArrayList<program> programs){
+    private static void save (ArrayList<program> programs, boolean complete){
         try {
-            PrintWriter pw = new PrintWriter("watching.csv", "UTF-8");
+            String c = "watching.csv";
+            if (complete){
+                c = "complete.csv";
+            }
+            PrintWriter pw = new PrintWriter(c, "UTF-8");
             for (int i = 0; i < programs.size(); i++) {
                 pw.println('"' + programs.get(i).title + '"' + "," + programs.get(i).currentEp + "," + programs.get(i).totalEp + "," + programs.get(i).airing);
             }
