@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 //Maybe can create 4 csvs instead of 2 and split type between anime and TV
-//Gonna have to use 2 programs arrays with completed in a seperate one and make changes to save based off of this
+//TODO create methods to sanitise all types of inputs
 class main {
 
     public static void main(String[] args) {
-        //Setup
+        //Loading Files
         ArrayList<program> programs = loadData("watching.csv");
         ArrayList<program> programsC = loadData("complete.csv");
 
@@ -114,6 +114,7 @@ class main {
 
     }
     private static ArrayList<program> loadData (String file){
+        //Method to load a string int int boolean csv file into memory as a program class array list
         ArrayList<program> programs = new ArrayList<>();
         File watchingFile = new File(file);
         if (!watchingFile.exists()) {
@@ -151,6 +152,7 @@ class main {
     }
 
     private static void save (ArrayList<program> programs, boolean complete){
+        //Save CSV files
         try {
             String c = "watching.csv";
             if (complete){
