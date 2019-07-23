@@ -31,7 +31,7 @@ class main {
             int choiceI;
             Scanner input = new Scanner(System.in);
 
-            System.out.println("(i)ncrement progress, (m)ove to/from completed, (d)elete, (e)dit, (a)dd, (s)earch, s(w)itch to/from completed, sa(v)e, save and (q)uit, quit wit(h)ouut saving ");
+            System.out.println("(i)ncrement progress, (m)ove to/from completed, (d)elete, (e)dit, (a)dd, (s)earch, s(w)itch view to/from completed, sa(v)e, save and (q)uit, quit wit(h)ouut saving ");
             choice = input.nextLine();
             choice.toLowerCase();
             switch (choice) {
@@ -144,12 +144,10 @@ class main {
                     continue;
                 case "m":
                     if (!complete) {
-                        programs.get(choiceI).invertAiring();
+                        programs.get(choiceI).complete();
                         programsC.add(programs.get(choiceI));
                         programs.remove(choiceI);
                     } else {
-                        programsC.get(choiceI).invertAiring();
-                        programsC.get(choiceI).complete();
                         programs.add(programsC.get(choiceI));
                         programsC.remove(choiceI);
                     }

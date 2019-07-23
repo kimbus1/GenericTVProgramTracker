@@ -43,15 +43,12 @@ public class program {
         return title + " " + currentEp + "/" + totalEp;
     }
 
-    public void invertAiring(){
-        airing = !airing;
-    }
-
     public String getTitle(){
         return title;
     }
 
     public void complete(){
         currentEp = totalEp;
+        airing = false;
     }
 }
