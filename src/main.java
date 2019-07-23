@@ -15,7 +15,7 @@ class main {
         boolean editing = true;
         boolean complete = false;
         while (editing) {
-            if(!complete) {
+            if (!complete) {
                 programs.sort(new programComparator());
                 for (int i = 0; i < programs.size(); i++) {
                     System.out.println("[" + i + "] " + programs.get(i));
@@ -30,10 +30,10 @@ class main {
             int choiceI;
             Scanner input = new Scanner(System.in);
 
-            System.out.println("(i)ncrement progress, (m)ove to/from completed, (d)elete, (e)dit, (a)dd, (s)earch, s(w)itch to/from completed, sa(v)e and quit, (q)uit withouut saving ");
+            System.out.println("(i)ncrement progress, (m)ove to/from completed, (d)elete, (e)dit, (a)dd, (s)earch, s(w)itch to/from completed, sa(v)e, save and (q)uit, quit wit(h)ouut saving ");
             choice = input.nextLine();
             choice.toLowerCase();
-            switch (choice){
+            switch (choice) {
                 case "a":
                     String title;
                     int epOn;
@@ -49,7 +49,7 @@ class main {
                         System.out.println("Enter total episodes");
                         epTot = input.nextInt();
                         input.nextLine();
-                    } catch (java.util.InputMismatchException e){
+                    } catch (java.util.InputMismatchException e) {
                         System.out.println("invalid choice");
                         input.nextLine();
                         input.nextLine();
@@ -57,10 +57,10 @@ class main {
                     }
                     System.out.println("Enter t if airing");
                     airS = input.nextLine();
-                    if (airS.equals("t")){
+                    if (airS.equals("t")) {
                         air = true;
                     }
-                    if (epOn > epTot){
+                    if (epOn > epTot) {
                         epOn = epTot;
                     }
                     program p = new program(title, epOn, epTot, air);
@@ -77,16 +77,24 @@ class main {
                     complete = !complete;
                     continue;
                 case "v":
+                    System.out.println("Saving");
                     save(programs, false);
                     save(programsC, true);
+                    continue;
                 case "q":
+                    System.out.println("Saving");
+                    save(programs, false);
+                    save(programsC, true);
+                case "h":
+                    System.out.println("Quitting");
                     System.exit(0);
                 case "i":
                 case "m":
                 case "d":
                 case "e":
                     break;
-                default: System.out.println("invalid choice");
+                default:
+                    System.out.println("invalid choice");
                     input.nextLine();
                     continue;
             }
@@ -94,22 +102,26 @@ class main {
             System.out.println("Select an entry to edit");
             try {
                 choiceI = input.nextInt();
-                if (choiceI > programs.size() - 1 || choiceI < 0) {
+                int i = programsC.size();
+                if (!complete) {
+                    i = programs.size();
+                }
+                if (choiceI > i - 1 || choiceI < 0) {
                     System.out.println("invalid choice");
                     input.nextLine();
                     input.nextLine();
                     continue;
                 }
-            } catch (java.util.InputMismatchException e){
+            } catch (java.util.InputMismatchException e) {
                 System.out.println("invalid choice");
                 input.nextLine();
                 input.nextLine();
                 continue;
             }
 
-            switch (choice){
+            switch (choice) {
                 case "i":
-                    if(!complete) {
+                    if (!complete) {
                         programs.get(choiceI).incrementEpisode();
                         System.out.println("Incremented " + programs.get(choiceI).getTitle());
                         input.nextLine();
@@ -122,7 +134,7 @@ class main {
                     }
                     continue;
                 case "m":
-                    if (!complete){
+                    if (!complete) {
                         programs.get(choiceI).invertAiring();
                         programsC.add(programs.get(choiceI));
                         programs.remove(choiceI);
@@ -135,14 +147,77 @@ class main {
                     continue;
                 case "d":
                     if (!complete) {
+                        System.out.println("Deleted " + programs.get(choiceI).getTitle());
                         programs.remove(choiceI);
+                        input.nextLine();
+                        input.nextLine();
                     } else {
+                        System.out.println("Deleted " + programsC.get(choiceI).getTitle());
                         programsC.remove(choiceI);
+                        input.nextLine();
+                        input.nextLine();
                     }
                 case "e":
+                    String prN = programsC.get(choiceI).getTitle();
+                    if (!complete){
+                        prN = programs.get(choiceI).getTitle();
+                    }
+                    System.out.println("Editing " + prN + ", leave blank to ignore field");
+                    String t;
+                    int c;
+                    String cS;
+                    int tl;
+                    String tlS;
+                    boolean a = false;
+                    boolean e;
+                    String ec;
+                    input.nextLine();
+                    System.out.println("New title, leave blank to ignore field");
+                    t = input.nextLine();
+                    try {
+                        System.out.println("New current ep, leave blank to ignore field");
+                        cS = input.nextLine();
+                        if (cS.equals("")){
+                            c = -1;
+                        } else {
+                            c = Integer.parseInt(cS);
+                        }
+                        System.out.println("New total ep, leave blank to ignore field");
+                        tlS = input.nextLine();
+                        if (tlS.equals("")){
+                            tl = -1;
+                        } else {
+                            tl = Integer.parseInt(tlS);
+                        }
+                        System.out.println("New airing, use t for airing, anything else for finished, leave blank to ignore field");
+                        ec = input.nextLine();
+                        ec.toLowerCase();
+                        if (ec.equals("")){
+                            e = false;
+                        } else if (ec.equals("t")){
+                            a = true;
+                            e = true;
+                        } else {
+                            a = false;
+                            e = true;
+                        }
+                    } catch (java.util.InputMismatchException|java.lang.NumberFormatException ee) {
+                        System.out.println("invalid choice");
+                        input.nextLine();
+                        continue;
+                    }
+                    if (!complete){
+                        programs.get(choiceI).editData(t,c,tl,a,e);
+                        System.out.println("New Entry " + programs.get(choiceI));
+                    } else {
+                        programsC.get(choiceI).editData(t,c,tl,a,e);
+                        System.out.println("New Entry " + programsC.get(choiceI));
+                    }
+                    input.nextLine();
+
+
             }
-            
-            //Edit(leave blank to ignore, set blank ints to 0, set last to true if airing was edited)
+
             //Search
 
 
@@ -150,7 +225,8 @@ class main {
         //Shutdown
 
     }
-    private static ArrayList<program> loadData (String file){
+
+    private static ArrayList<program> loadData(String file) {
         //Method to load a string int int boolean csv file into memory as a program class array list
         ArrayList<program> programs = new ArrayList<>();
         File watchingFile = new File(file);
@@ -188,11 +264,11 @@ class main {
         return programs;
     }
 
-    private static void save (ArrayList<program> programs, boolean complete){
+    private static void save(ArrayList<program> programs, boolean complete) {
         //Save CSV files
         try {
             String c = "watching.csv";
-            if (complete){
+            if (complete) {
                 c = "complete.csv";
             }
             PrintWriter pw = new PrintWriter(c, "UTF-8");

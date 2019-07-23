@@ -22,11 +22,14 @@ public class program {
         if (!title.isEmpty()){
             this.title = title;
         }
-        if (currentEp > 0){
+        if (currentEp > -1){
             this.currentEp = currentEp;
         }
-        if (totalEp > 0){
+        if (totalEp > 0-1){
             this.totalEp = totalEp;
+            if (this.totalEp < this.currentEp){
+                this.currentEp = this.totalEp;
+            }
         }
         if (airingEdited){
             this.airing = airing;
