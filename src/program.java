@@ -25,7 +25,7 @@ public class program {
         if (currentEp > -1){
             this.currentEp = currentEp;
         }
-        if (totalEp > 0-1){
+        if (totalEp > -1){
             this.totalEp = totalEp;
             if (this.totalEp < this.currentEp){
                 this.currentEp = this.totalEp;
