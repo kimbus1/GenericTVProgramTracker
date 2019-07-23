@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 //Maybe can create 4 csvs instead of 2 and split type between anime and TV
 //TODO create methods to sanitise all types of inputs
@@ -71,7 +72,15 @@ class main {
                     }
                     continue;
                 case "s":
-                    //search
+                    System.out.println("Enter Query");
+                    String q = input.nextLine();
+                    System.out.println("Searching for " + q);
+                    if (!complete){
+                        System.out.println(findProgram(q, programs));
+                    } else {
+                        System.out.println(findProgram(q, programsC));
+                    }
+                    input.nextLine();
                     continue;
                 case "w":
                     complete = !complete;
@@ -282,4 +291,14 @@ class main {
             e.printStackTrace();
         }
     }
+    private static String findProgram(String search, ArrayList<program> programs){
+        String results = "";
+        for (int i = 0; i < programs.size(); i++) {
+            if (Pattern.compile(Pattern.quote(search), Pattern.CASE_INSENSITIVE).matcher(programs.get(i).getTitle()).find()) {
+                results = results + "\n[" + i + "] " + programs.get(i).getTitle();
+            }
+        }
+        return results;
+    }
+
 }
