@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 //Maybe can create 4 csvs instead of 2 and split type between anime and TV
-//TODO create methods to sanitise all types of inputs
 class main {
 
     public static void main(String[] args) {
@@ -75,6 +74,7 @@ class main {
                     System.out.println("Enter Query");
                     String q = input.nextLine();
                     System.out.println("Searching for " + q);
+                    System.out.println("Results:\n-----------------------------------------------------------");
                     if (!complete){
                         System.out.println(findProgram(q, programs));
                     } else {
@@ -134,6 +134,19 @@ class main {
                         programs.get(choiceI).incrementEpisode();
                         System.out.println("Incremented " + programs.get(choiceI).getTitle());
                         input.nextLine();
+                        if (programs.get(choiceI).currentEp == programs.get(choiceI).totalEp){
+                            String c2;
+                            System.out.println("Do you wish to move " + programs.get(choiceI).getTitle() + " to completed programs? y/n");
+                            c2 = input.nextLine();
+                            if (c2.toLowerCase().equals("y")){
+                                programs.get(choiceI).complete();
+                                programsC.add(programs.get(choiceI));
+                                programs.remove(choiceI);
+                                System.out.println("Moved");
+                            } else {
+                                System.out.println("Ignored");
+                            }
+                        }
                         input.nextLine();
                     } else {
                         programsC.get(choiceI).incrementEpisode();
