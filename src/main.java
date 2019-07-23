@@ -92,19 +92,56 @@ class main {
             }
 
             System.out.println("Select an entry to edit");
-            choiceI = input.nextInt();
-            if (choiceI > programs.size() - 1 || choiceI < 0){
+            try {
+                choiceI = input.nextInt();
+                if (choiceI > programs.size() - 1 || choiceI < 0) {
+                    System.out.println("invalid choice");
+                    input.nextLine();
+                    input.nextLine();
+                    continue;
+                }
+            } catch (java.util.InputMismatchException e){
                 System.out.println("invalid choice");
+                input.nextLine();
                 input.nextLine();
                 continue;
             }
-            input.nextLine();
-            System.out.println(programs.get(choiceI));
-            input.nextLine();
 
-            //Increment program number
-            //Move to Completed
-            //Delete
+            switch (choice){
+                case "i":
+                    if(!complete) {
+                        programs.get(choiceI).incrementEpisode();
+                        System.out.println("Incremented " + programs.get(choiceI).getTitle());
+                        input.nextLine();
+                        input.nextLine();
+                    } else {
+                        programsC.get(choiceI).incrementEpisode();
+                        System.out.println("Incremented " + programsC.get(choiceI).getTitle());
+                        input.nextLine();
+                        input.nextLine();
+                    }
+                    continue;
+                case "m":
+                    if (!complete){
+                        programs.get(choiceI).invertAiring();
+                        programsC.add(programs.get(choiceI));
+                        programs.remove(choiceI);
+                    } else {
+                        programsC.get(choiceI).invertAiring();
+                        programsC.get(choiceI).complete();
+                        programs.add(programsC.get(choiceI));
+                        programsC.remove(choiceI);
+                    }
+                    continue;
+                case "d":
+                    if (!complete) {
+                        programs.remove(choiceI);
+                    } else {
+                        programsC.remove(choiceI);
+                    }
+                case "e":
+            }
+            
             //Edit(leave blank to ignore, set blank ints to 0, set last to true if airing was edited)
             //Search
 
