@@ -15,10 +15,19 @@ class main {
         //Main Loop
         boolean editing = true;
         boolean complete = false;
+        boolean airSec = true;
         while (editing) {
+            airSec = true;
             if (!complete) {
                 programs.sort(new programComparator());
                 for (int i = 0; i < programs.size(); i++) {
+                    if (i == 0){
+                        System.out.println("-----------------------------------------------------------");
+                    }
+                    if (!programs.get(i).airing && airSec){
+                        airSec = false;
+                        System.out.println("-----------------------------------------------------------");
+                    }
                     System.out.println("[" + i + "] " + programs.get(i));
                 }
             } else {
