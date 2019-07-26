@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 //Maybe can create 4 csvs instead of 2 and split type between anime and TV
 class main {
+    static public int numResults;
 
     public static void main(String[] args) {
         //Loading Files
@@ -80,6 +81,8 @@ class main {
                     } else {
                         System.out.println(findProgram(q, programsC));
                     }
+                    System.out.println();
+                    System.out.println(numResults + " Results");
                     input.nextLine();
                     continue;
                 case "w":
@@ -234,16 +237,8 @@ class main {
                         System.out.println("New Entry " + programsC.get(choiceI));
                     }
                     input.nextLine();
-
-
             }
-
-            //Search
-
-
         }
-        //Shutdown
-
     }
 
     private static ArrayList<program> loadData(String file) {
@@ -303,10 +298,12 @@ class main {
         }
     }
     private static String findProgram(String search, ArrayList<program> programs){
+        numResults = 0;
         String results = "";
         for (int i = 0; i < programs.size(); i++) {
             if (Pattern.compile(Pattern.quote(search), Pattern.CASE_INSENSITIVE).matcher(programs.get(i).getTitle()).find()) {
                 results = results + "\n[" + i + "] " + programs.get(i).getTitle();
+                numResults++;
             }
         }
         return results;
