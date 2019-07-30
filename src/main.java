@@ -101,6 +101,9 @@ class main {
                     System.out.println("Saving");
                     save(programs, false);
                     save(programsC, true);
+                    System.out.println("Complete");
+                    input.nextLine();
+                    System.out.println();
                     continue;
                 case "q":
                     System.out.println("Saving");
@@ -120,7 +123,7 @@ class main {
                     continue;
             }
 
-            System.out.println("Select an entry to edit");
+            System.out.println("Select an entry");
             try {
                 choiceI = input.nextInt();
                 int i = programsC.size();
@@ -189,6 +192,7 @@ class main {
                         input.nextLine();
                         input.nextLine();
                     }
+                    continue;
                 case "e":
                     String prN = programsC.get(choiceI).getTitle();
                     if (!complete){
@@ -240,10 +244,10 @@ class main {
                     }
                     if (!complete){
                         programs.get(choiceI).editData(t,c,tl,a,e);
-                        System.out.println("New Entry " + programs.get(choiceI));
+                        System.out.println("Edited Entry " + programs.get(choiceI));
                     } else {
                         programsC.get(choiceI).editData(t,c,tl,a,e);
-                        System.out.println("New Entry " + programsC.get(choiceI));
+                        System.out.println("Edited Entry " + programsC.get(choiceI));
                     }
                     input.nextLine();
             }
