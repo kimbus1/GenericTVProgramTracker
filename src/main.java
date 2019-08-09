@@ -9,7 +9,7 @@ class main {
 
     public static void main(String[] args) {
         //Loading Files
-        ArrayList<Program> Programs = loadData("watching.csv");
+        ArrayList<Program> programs = loadData("watching.csv");
         ArrayList<Program> programsC = loadData("complete.csv");
 
         //Main Loop
@@ -19,16 +19,16 @@ class main {
         while (editing) {
             airSec = true;
             if (!complete) {
-                Programs.sort(new ProgramComparator());
-                for (int i = 0; i < Programs.size(); i++) {
+                programs.sort(new ProgramComparator());
+                for (int i = 0; i < programs.size(); i++) {
                     if (i == 0){
                         System.out.println("-----------------------------------------------------------");
                     }
-                    if (!Programs.get(i).airing && airSec){
+                    if (!programs.get(i).airing && airSec){
                         airSec = false;
                         System.out.println("-----------------------------------------------------------");
                     }
-                    System.out.println("[" + i + "] " + Programs.get(i));
+                    System.out.println("[" + i + "] " + programs.get(i));
                 }
             } else {
                 programsC.sort(new ProgramComparator());
@@ -75,7 +75,7 @@ class main {
                     }
                     Program p = new Program(title, epOn, epTot, air);
                     if (!complete) {
-                        Programs.add(p);
+                        programs.add(p);
                     } else {
                         programsC.add(p);
                     }
@@ -86,7 +86,7 @@ class main {
                     System.out.println("Searching for " + q);
                     System.out.println("Results:\n-----------------------------------------------------------");
                     if (!complete){
-                        System.out.println(findProgram(q, Programs));
+                        System.out.println(findProgram(q, programs));
                     } else {
                         System.out.println(findProgram(q, programsC));
                     }
@@ -99,7 +99,7 @@ class main {
                     continue;
                 case "v":
                     System.out.println("Saving");
-                    save(Programs, false);
+                    save(programs, false);
                     save(programsC, true);
                     System.out.println("Complete");
                     input.nextLine();
@@ -107,7 +107,7 @@ class main {
                     continue;
                 case "q":
                     System.out.println("Saving");
-                    save(Programs, false);
+                    save(programs, false);
                     save(programsC, true);
                 case "h":
                     System.out.println("Quitting");
@@ -128,7 +128,7 @@ class main {
                 choiceI = input.nextInt();
                 int i = programsC.size();
                 if (!complete) {
-                    i = Programs.size();
+                    i = programs.size();
                 }
                 if (choiceI > i - 1 || choiceI < 0) {
                     System.out.println("invalid choice");
@@ -146,17 +146,17 @@ class main {
             switch (choice) {
                 case "i":
                     if (!complete) {
-                        Programs.get(choiceI).incrementEpisode();
-                        System.out.println("Incremented " + Programs.get(choiceI).getTitle());
+                        programs.get(choiceI).incrementEpisode();
+                        System.out.println("Incremented " + programs.get(choiceI).getTitle());
                         input.nextLine();
-                        if (Programs.get(choiceI).currentEp == Programs.get(choiceI).totalEp){
+                        if (programs.get(choiceI).currentEp == programs.get(choiceI).totalEp){
                             String c2;
-                            System.out.println("Do you wish to move " + Programs.get(choiceI).getTitle() + " to completed Programs? y/n");
+                            System.out.println("Do you wish to move " + programs.get(choiceI).getTitle() + " to completed Programs? y/n");
                             c2 = input.nextLine();
                             if (c2.toLowerCase().equals("y")){
-                                Programs.get(choiceI).complete();
-                                programsC.add(Programs.get(choiceI));
-                                Programs.remove(choiceI);
+                                programs.get(choiceI).complete();
+                                programsC.add(programs.get(choiceI));
+                                programs.remove(choiceI);
                                 System.out.println("Moved");
                             } else {
                                 System.out.println("Ignored");
@@ -172,18 +172,18 @@ class main {
                     continue;
                 case "m":
                     if (!complete) {
-                        Programs.get(choiceI).complete();
-                        programsC.add(Programs.get(choiceI));
-                        Programs.remove(choiceI);
+                        programs.get(choiceI).complete();
+                        programsC.add(programs.get(choiceI));
+                        programs.remove(choiceI);
                     } else {
-                        Programs.add(programsC.get(choiceI));
+                        programs.add(programsC.get(choiceI));
                         programsC.remove(choiceI);
                     }
                     continue;
                 case "d":
                     if (!complete) {
-                        System.out.println("Deleted " + Programs.get(choiceI).getTitle());
-                        Programs.remove(choiceI);
+                        System.out.println("Deleted " + programs.get(choiceI).getTitle());
+                        programs.remove(choiceI);
                         input.nextLine();
                         input.nextLine();
                     } else {
@@ -196,7 +196,7 @@ class main {
                 case "e":
                     String prN = programsC.get(choiceI).getTitle();
                     if (!complete){
-                        prN = Programs.get(choiceI).getTitle();
+                        prN = programs.get(choiceI).getTitle();
                     }
                     System.out.println("Editing " + prN + ", leave blank to ignore field");
                     String t;
@@ -243,8 +243,8 @@ class main {
                         continue;
                     }
                     if (!complete){
-                        Programs.get(choiceI).editData(t,c,tl,a,e);
-                        System.out.println("Edited Entry " + Programs.get(choiceI));
+                        programs.get(choiceI).editData(t,c,tl,a,e);
+                        System.out.println("Edited Entry " + programs.get(choiceI));
                     } else {
                         programsC.get(choiceI).editData(t,c,tl,a,e);
                         System.out.println("Edited Entry " + programsC.get(choiceI));
@@ -256,7 +256,7 @@ class main {
 
     private static ArrayList<Program> loadData(String file) {
         //Method to load a string int int boolean csv file into memory as a Program class array list
-        ArrayList<Program> Programs = new ArrayList<>();
+        ArrayList<Program> programs = new ArrayList<>();
         File watchingFile = new File(file);
         if (!watchingFile.exists()) {
             try {
@@ -281,15 +281,15 @@ class main {
                 if (remaining.substring(remaining.lastIndexOf(",") + 1).toUpperCase().equals("TRUE")) {
                     airing = true;
                 }
-                Programs.add(new Program(title, currentEp, totalEp, airing));
+                programs.add(new Program(title, currentEp, totalEp, airing));
 
             }
             watchingRead.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Programs.sort(new ProgramComparator());
-        return Programs;
+        programs.sort(new ProgramComparator());
+        return programs;
     }
 
     private static void save(ArrayList<Program> programs, boolean complete) {
