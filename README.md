@@ -1,5 +1,5 @@
 # GenericTVProgramTracker
-generic command line based program tracker using csv database
+generic command line based Program tracker using csv database
 
 
 In order to import MAL into the database:
@@ -12,9 +12,9 @@ In order to import MAL into the database:
 7. The entries should be in the order title, current episode, total episodes, airing state
 8. Mark entries that are airing with "true" in the last collumn, and those that are not with "false"
 9. Save as a CSV file, Field deliminated by "," and String deliminated by """
-10. Save CSV file in same location as the program root, calling the file "watching.csv"
-11. Repeat for Completed, making sure that the collumn names are properly followed as MAL displays a complete program as just "12" instead of "12/12"
+10. Save CSV file in same location as the Program root, calling the file "watching.csv"
+11. Repeat for Completed, making sure that the collumn names are properly followed as MAL displays a complete Program as just "12" instead of "12/12"
 12. Save as "complete.csv"
 
 
-The process for other websites will be similar, just make sure that the csv files have the right name, (watching.csv, complete.csv) and that the programs are in the right format (title, episode number, total episodes, airing state as true or false) and, if the title includeds commas, make sure the whole title is enclosed in quotes.
+The process for other websites will be similar, just make sure that the csv files have the right name, (watching.csv, complete.csv) and that the Programs are in the right format (title, episode number, total episodes, airing state as true or false) and, if the title includeds commas, make sure the whole title is enclosed in quotes.

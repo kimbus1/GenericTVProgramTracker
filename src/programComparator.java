@@ -1,9 +1,9 @@
 import java.util.Comparator;
 
-public class programComparator implements Comparator<program> {
+public class ProgramComparator implements Comparator<Program> {
 
     @Override
-    public int compare(program o1, program o2) {
+    public int compare(Program o1, Program o2) {
         if (o1.airing && o2.airing){
             return o1.title.compareTo(o2.title);
         }

@@ -1,14 +1,21 @@
-public class program {
+public class Program {
     String title;
     int currentEp;
     int totalEp;
     boolean airing;
 
-    public program(String title, int currentEp, int totalEp, boolean airing){
+    public Program(String title, int currentEp, int totalEp, boolean airing){
         this.title = title;
         this.currentEp = currentEp;
         this.totalEp = totalEp;
         this.airing = airing;
+    }
+
+    public Program(Program p){
+        title = p.title;
+        currentEp = p.currentEp;
+        totalEp = p.totalEp;
+        airing = p.airing;
     }
 
     public void incrementEpisode(){
