@@ -147,7 +147,7 @@ class main {
                 case "i":
                     if (!complete) {
                         programs.get(choiceI).incrementEpisode();
-                        System.out.println("Incremented " + programs.get(choiceI).getTitle());
+                        System.out.println("Incremented " + '"' + programs.get(choiceI).getTitle()  + '"' + " to " + programs.get(choiceI).currentEp);
                         input.nextLine();
                         if (programs.get(choiceI).currentEp == programs.get(choiceI).totalEp){
                             String c2;
@@ -165,7 +165,7 @@ class main {
                         input.nextLine();
                     } else {
                         programsC.get(choiceI).incrementEpisode();
-                        System.out.println("Incremented " + programsC.get(choiceI).getTitle());
+                        System.out.println("Incremented " +'"' + programsC.get(choiceI).getTitle() + '"' + " to " + programsC.get(choiceI).currentEp);
                         input.nextLine();
                         input.nextLine();
                     }
