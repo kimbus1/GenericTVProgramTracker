@@ -172,10 +172,16 @@ class main {
                     continue;
                 case "m":
                     if (!complete) {
+                        System.out.println("Moved " + programs.get(choiceI).getTitle());
+                        input.nextLine();
+                        input.nextLine();
                         programs.get(choiceI).complete();
                         programsC.add(programs.get(choiceI));
                         programs.remove(choiceI);
                     } else {
+                        System.out.println("Moved " + programsC.get(choiceI).getTitle());
+                        input.nextLine();
+                        input.nextLine();
                         programs.add(programsC.get(choiceI));
                         programsC.remove(choiceI);
                     }
