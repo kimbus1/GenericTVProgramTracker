@@ -250,10 +250,10 @@ class main {
                     }
                     if (!complete){
                         programs.get(choiceI).editData(t,c,tl,a,e);
-                        System.out.println("Edited Entry " + programs.get(choiceI));
+                        System.out.println("Edited Entry \"" + programs.get(choiceI) + "\"");
                     } else {
                         programsC.get(choiceI).editData(t,c,tl,a,e);
-                        System.out.println("Edited Entry " + programsC.get(choiceI));
+                        System.out.println("Edited Entry \"" + programsC.get(choiceI) + "\"");
                     }
                     input.nextLine();
             }
