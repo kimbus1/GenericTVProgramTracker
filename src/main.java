@@ -204,7 +204,7 @@ class main {
                     if (!complete){
                         prN = programs.get(choiceI).getTitle();
                     }
-                    System.out.println("Editing " + prN + ", leave blank to ignore field");
+                    System.out.println("Editing " + prN);
                     String t;
                     int c;
                     String cS;
