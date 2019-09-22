@@ -40,7 +40,7 @@ class main {
             int choiceI;
             Scanner input = new Scanner(System.in);
 
-            System.out.println("(i)ncrement progress, (m)ove to/from completed, (d)elete, (e)dit, (a)dd, (s)earch, s(w)itch view to/from completed, sa(v)e, save and (q)uit, quit wit(h)ouut saving ");
+            System.out.println("(i)ncrement progress, (m)ove to/from completed, (d)elete, (e)dit, (a)dd, (s)earch, s(w)itch view to/from completed, (p)rogress to next season, sa(v)e, save and (q)uit, quit wit(h)ouut saving ");
             choice = input.nextLine();
             choice.toLowerCase();
             switch (choice) {
@@ -78,6 +78,23 @@ class main {
                         programs.add(p);
                     } else {
                         programsC.add(p);
+                    }
+                    continue;
+                case "p":
+                    System.out.println("This will set all currently airing programs to complete, and set all other programs to airing. This will only affect the watching page.\nPress y to confirm");
+                    String y = input.nextLine();
+                    y.toLowerCase();
+                    if (y.equals("y")){
+                        for(int i = 0; i < programs.size(); i++){
+                            if (programs.get(i).airing){
+                                programs.get(i).complete();
+                                programsC.add(programs.get(i));
+                                programs.remove(i);
+                                i--;
+                            } else {
+                                programs.get(i).airing = true;
+                            }
+                        }
                     }
                     continue;
                 case "s":
