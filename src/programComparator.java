@@ -19,6 +19,9 @@ public class ProgramComparator implements Comparator<Program> {
         if (o1.airing == Airing.FUTURE){
             return 1;
         }
+        if (o2.airing == Airing.FUTURE){
+            return -1;
+        }
         return o1.title.compareTo(o2.title);
     }
 }
