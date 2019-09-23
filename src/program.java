@@ -2,9 +2,9 @@ public class Program {
     String title;
     int currentEp;
     int totalEp;
-    boolean airing;
+    Airing airing;
 
-    public Program(String title, int currentEp, int totalEp, boolean airing){
+    public Program(String title, int currentEp, int totalEp, Airing airing){
         this.title = title;
         this.currentEp = currentEp;
         this.totalEp = totalEp;
@@ -24,7 +24,7 @@ public class Program {
         }
     }
 
-    public void editData(String title, int currentEp, int totalEp, boolean airing, boolean airingEdited){
+    public void editData(String title, int currentEp, int totalEp, Airing airing, boolean airingEdited){
         title.trim();
         if (!title.isEmpty()){
             this.title = title;
@@ -44,7 +44,7 @@ public class Program {
     }
 
     public String toString(){
-        if (airing){
+        if (airing == Airing.AIRING){
             return title + " " + currentEp + "/" + totalEp + " Airing";
         }
         return title + " " + currentEp + "/" + totalEp;
@@ -56,6 +56,19 @@ public class Program {
 
     public void complete(){
         currentEp = totalEp;
-        airing = false;
+        airing = Airing.AIRED;
+    }
+
+    public String getAiring(){
+        switch (airing){
+            case AIRED:
+                return "Aired";
+            case AIRING:
+                return "Airing";
+            case FUTURE:
+                return "Future";
+        }
+        return "Aired";
     }
 }
+
