@@ -307,12 +307,12 @@ class main {
                 String remaining = watchingOut.substring(watchingOut.indexOf(",", watchingOut.indexOf('"', 1)) + 1);
                 int currentEp = Integer.parseInt(remaining.substring(0, remaining.indexOf(",")));
                 int totalEp = Integer.parseInt(remaining.substring(remaining.indexOf(",") + 1, remaining.indexOf(",", remaining.indexOf(",") + 1)));
-                Airing airing = Airing.AIRED;
+               Airing airing = Airing.AIRED;
                 String comp = remaining.substring(remaining.lastIndexOf(",") + 1).toUpperCase();
-                if (comp.equals("Airing")) {
+               if (comp.equals("AIRING")) {
                     airing = Airing.AIRING;
                 }
-                if (comp.equals("Future")){
+                if (comp.equals("FUTURE")){
                     airing = Airing.FUTURE;
                 }
                 programs.add(new Program(title, currentEp, totalEp, airing));

@@ -62,11 +62,11 @@ public class Program {
     public String getAiring(){
         switch (airing){
             case AIRED:
-                return "Aired";
+                return "AIRED";
             case AIRING:
-                return "Airing";
+                return "AIRING";
             case FUTURE:
-                return "Future";
+                return "FUTURE";
         }
         return "Aired";
     }
