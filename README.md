@@ -10,7 +10,7 @@ In order to import MAL into the database:
 5. Entries that dont have any watched episodes are marked with "-", change this to 0
 6. Entries that dont have a total episode count are marked with "-", change this to the total episodes
 7. The entries should be in the order title, current episode, total episodes, airing state
-8. Mark entries that are airing with "true" in the last collumn, and those that are not with "false"
+8. Mark entries that are airing with "AIRING" in the last collumn, and those that are not with "AIRED"
 9. Save as a CSV file, Field deliminated by "," and String deliminated by """
 10. Save CSV file in same location as the Program root, calling the file "watching.csv"
 11. Repeat for Completed, making sure that the collumn names are properly followed as MAL displays a complete Program as just "12" instead of "12/12"
