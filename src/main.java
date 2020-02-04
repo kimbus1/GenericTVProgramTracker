@@ -23,14 +23,14 @@ class main {
             if (!complete) {
                 programs.sort(new ProgramComparator());
                 for (int i = 0; i < programs.size(); i++) {
-                    if (i == 0){
+                    if (i == 0) {
                         System.out.println("-----------------------------------------------------------");
                     }
-                    if (programs.get(i).airing == Airing.AIRED && airSec){
+                    if (programs.get(i).airing == Airing.AIRED && airSec) {
                         airSec = false;
                         System.out.println("-----------------------------------------------------------");
                     }
-                    if (programs.get(i).airing == Airing.FUTURE && futSec){
+                    if (programs.get(i).airing == Airing.FUTURE && futSec) {
                         futSec = false;
                         System.out.println("-----------------------------------------------------------");
                     }
@@ -45,7 +45,7 @@ class main {
             String choice;
             int choiceI;
             Scanner input = new Scanner(System.in);
-
+            System.out.println("-----------------------------------------------------------");
             System.out.println("(i)ncrement progress, (m)ove to/from completed, (d)elete, (e)dit, (a)dd, (s)earch, s(w)itch view to/from completed, (p)rogress to next season, sa(v)e, save and (q)uit, quit wit(h)ouut saving ");
             choice = input.nextLine();
             choice.toLowerCase();
@@ -76,7 +76,7 @@ class main {
                     airS.toLowerCase();
                     if (airS.equals("t")) {
                         air = Airing.AIRING;
-                    } else if (airS.equals("n")){
+                    } else if (airS.equals("n")) {
                         air = Airing.FUTURE;
                     }
                     if (epOn > epTot) {
@@ -106,7 +106,7 @@ class main {
                     String q = input.nextLine();
                     System.out.println("Searching for " + q);
                     System.out.println("Results:\n-----------------------------------------------------------");
-                    if (!complete){
+                    if (!complete) {
                         System.out.println(findProgram(q, programs));
                     } else {
                         System.out.println(findProgram(q, programsC));
@@ -168,13 +168,13 @@ class main {
                 case "i":
                     if (!complete) {
                         programs.get(choiceI).incrementEpisode();
-                        System.out.println("Incremented " + '"' + programs.get(choiceI).getTitle()  + '"' + " to " + programs.get(choiceI).currentEp);
+                        System.out.println("Incremented " + '"' + programs.get(choiceI).getTitle() + '"' + " to " + programs.get(choiceI).currentEp);
                         input.nextLine();
-                        if (programs.get(choiceI).currentEp == programs.get(choiceI).totalEp){
+                        if (programs.get(choiceI).currentEp == programs.get(choiceI).totalEp) {
                             String c2;
                             System.out.println("Do you wish to move " + programs.get(choiceI).getTitle() + " to completed Programs? y/n");
                             c2 = input.nextLine();
-                            if (c2.toLowerCase().equals("y")){
+                            if (c2.toLowerCase().equals("y")) {
                                 programs.get(choiceI).complete();
                                 programsC.add(programs.get(choiceI));
                                 programs.remove(choiceI);
@@ -186,7 +186,7 @@ class main {
                         input.nextLine();
                     } else {
                         programsC.get(choiceI).incrementEpisode();
-                        System.out.println("Incremented " +'"' + programsC.get(choiceI).getTitle() + '"' + " to " + programsC.get(choiceI).currentEp);
+                        System.out.println("Incremented " + '"' + programsC.get(choiceI).getTitle() + '"' + " to " + programsC.get(choiceI).currentEp);
                         input.nextLine();
                         input.nextLine();
                     }
@@ -222,7 +222,7 @@ class main {
                     continue;
                 case "e":
                     String prN = programsC.get(choiceI).getTitle();
-                    if (!complete){
+                    if (!complete) {
                         prN = programs.get(choiceI).getTitle();
                     }
                     System.out.println("Editing " + prN);
@@ -240,14 +240,14 @@ class main {
                     try {
                         System.out.println("New current ep, leave blank to ignore field");
                         cS = input.nextLine();
-                        if (cS.equals("")){
+                        if (cS.equals("")) {
                             c = -1;
                         } else {
                             c = Integer.parseInt(cS);
                         }
                         System.out.println("New total ep, leave blank to ignore field");
                         tlS = input.nextLine();
-                        if (tlS.equals("")){
+                        if (tlS.equals("")) {
                             tl = -1;
                         } else {
                             tl = Integer.parseInt(tlS);
@@ -255,28 +255,28 @@ class main {
                         System.out.println("New airing, use t for airing, n if it airing in the next season, anything else for not airing, leave blank to ignore field");
                         ec = input.nextLine();
                         ec.toLowerCase();
-                        if (ec.equals("")){
+                        if (ec.equals("")) {
                             e = false;
                         } else if (ec.equals("t")) {
                             a = Airing.AIRING;
                             e = true;
-                        } else if(ec.equals("n")){
+                        } else if (ec.equals("n")) {
                             a = Airing.FUTURE;
                             e = true;
                         } else {
                             a = Airing.AIRED;
                             e = true;
                         }
-                    } catch (java.util.InputMismatchException|java.lang.NumberFormatException ee) {
+                    } catch (java.util.InputMismatchException | java.lang.NumberFormatException ee) {
                         System.out.println("invalid choice");
                         input.nextLine();
                         continue;
                     }
-                    if (!complete){
-                        programs.get(choiceI).editData(t,c,tl,a,e);
+                    if (!complete) {
+                        programs.get(choiceI).editData(t, c, tl, a, e);
                         System.out.println("Edited Entry \"" + programs.get(choiceI) + "\"");
                     } else {
-                        programsC.get(choiceI).editData(t,c,tl,a,e);
+                        programsC.get(choiceI).editData(t, c, tl, a, e);
                         System.out.println("Edited Entry \"" + programsC.get(choiceI) + "\"");
                     }
                     input.nextLine();
@@ -307,12 +307,12 @@ class main {
                 String remaining = watchingOut.substring(watchingOut.indexOf(",", watchingOut.indexOf('"', 1)) + 1);
                 int currentEp = Integer.parseInt(remaining.substring(0, remaining.indexOf(",")));
                 int totalEp = Integer.parseInt(remaining.substring(remaining.indexOf(",") + 1, remaining.indexOf(",", remaining.indexOf(",") + 1)));
-               Airing airing = Airing.AIRED;
+                Airing airing = Airing.AIRED;
                 String comp = remaining.substring(remaining.lastIndexOf(",") + 1).toUpperCase();
-               if (comp.equals("AIRING")) {
+                if (comp.equals("AIRING")) {
                     airing = Airing.AIRING;
                 }
-                if (comp.equals("FUTURE")){
+                if (comp.equals("FUTURE")) {
                     airing = Airing.FUTURE;
                 }
                 programs.add(new Program(title, currentEp, totalEp, airing));
@@ -344,7 +344,8 @@ class main {
             e.printStackTrace();
         }
     }
-    private static String findProgram(String search, ArrayList<Program> programs){
+
+    private static String findProgram(String search, ArrayList<Program> programs) {
         numResults = 0;
         String results = "";
         for (int i = 0; i < programs.size(); i++) {
